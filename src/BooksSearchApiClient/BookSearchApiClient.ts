@@ -30,16 +30,16 @@ export class BookSearchApiClient {
       }
       
       if (this.format !== 'xml' && this.format !== 'json') {
-        logger.error('Invalid format requested for getBooksByAuthor, ,ust be either xml or json')
+        logger.error('Invalid format requested for getBooksByAuthor, must be either xml or json')
         return {
           error: {
             status: 400,
             code: 'BAD_REQUEST',
-            message: 'Invalid format requested for getBooksByAuthor, ,ust be either xml or json'
+            message: 'Invalid format requested for getBooksByAuthor, must be either xml or json'
           }
         }
       }
-      
+
       const booksResponse = await axios.get<BooksResponse[]>(
         'http://api.book-seller-example.com/by-author',
         { params: { authorName, limit, format: this.format } }
@@ -61,7 +61,13 @@ export class BookSearchApiClient {
       }
     } catch (error) {
       logger.error('Something went wrong calling getBooksByAuthor', error)
-      throw error
+      return {
+        error: {
+          status: 500,
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Something went wrong'
+        }
+      }
       }
   }
 

@@ -2,9 +2,17 @@ import { Request } from 'express'
 import { BookSearchApiClient } from "@source/BooksSearchApiClient/BookSearchApiClient";
 import { ApiResponse, BooksByAuthorResponse, ErrorDetails } from '@source/types';
 
-export class GetController {
-    async getBooksByAuthor(req: Request): Promise<ApiResponse<BooksByAuthorResponse[]> | ErrorDetails> {
-        const bookSearchApiClient = new BookSearchApiClient('json')
-        return bookSearchApiClient.getBooksByAuthor(req.body.author, req.body.limit)
-    }
-}
+const author = 'Shakespear'
+const limit = 10
+
+const client = new BookSearchApiClient('json')
+const booksByAuthor =  client.getBooksByAuthor(author, limit)
+
+/* 
+To further improve this, I would pass in a url as a parameter to getBooksByAuthor
+so that different book seller APIs can be used with this class
+e.g.
+client.getBooksByAuthor(author, limit, url)
+*/
+
+

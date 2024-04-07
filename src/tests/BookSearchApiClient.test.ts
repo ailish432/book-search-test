@@ -1,7 +1,6 @@
 import { buildApiResponse } from '../utilities/buildApiResponse';
 import { BookSearchApiClient } from '../BooksSearchApiClient/BookSearchApiClient';
 import axios from 'axios';
-import * as xml2js from 'xml2js';
 import { Formats } from '@source/types';
 
 jest.mock('axios');
@@ -126,7 +125,6 @@ describe('BookSearchApiClient tests', () => {
 
   it('should return mapped xml response', async () => {
     const js = { some: 'result' };
-    let result;
     mockedAxios.get.mockResolvedValue({
       data: `<?xml version="1.0" encoding="UTF-8"?>
                        <response>
@@ -206,7 +204,7 @@ describe('BookSearchApiClient tests', () => {
         error: {
             status: 400,
             code: 'BAD_REQUEST',
-            message: 'Invalid format requested for getBooksByAuthor, ,ust be either xml or json'
+            message: 'Invalid format requested for getBooksByAuthor, must be either xml or json'
         }
       };
 
