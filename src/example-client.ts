@@ -1,6 +1,4 @@
-import { Request } from 'express'
 import { BookSearchApiClient } from "@source/BooksSearchApiClient/BookSearchApiClient";
-import { ApiResponse, BooksByAuthorResponse, ErrorDetails } from '@source/types';
 
 const author = 'Shakespear'
 const limit = 10
